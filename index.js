@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import mysql from 'mysql2/promise';
 
-dotenv.config();
+// dotenv.config();
 // dotenv.config({ path: path.resolve('../.env') });
 // dotenv.config({ path: path.resolve('/.env') }); // This doesn't work, just use dotenv.config();
 
@@ -19,14 +19,14 @@ console.log("PORT value received from .env : " + PORT)
 
 const app = express();
 
-    // app.use(cors());
-    // app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
 const db = await mysql.createConnection(process.env.DATABASE_URL);
 
-app.use("/", (req, res) => { // to be commented
-  res.json({ message : "Hello from Express App" });
-});
+// app.use("/", (req, res) => { // to be commented
+//   res.json({ message : "Hello from Express App" });
+// });
 
 app.get('/planetscaletest', (req, res) => { // working with planetscale
   res.json({msq : 'PlanetScale testing'})
